@@ -1,5 +1,5 @@
 {
-    "name": "sun-asterisk/laravel2fa",
+    "name": "sun-asterisk/laravel-2fa",
     "description": "Two factor authentication for laravel",
     "type": "library",
     "license": "MIT",
@@ -8,8 +8,7 @@
         "illuminate/config": "~5.0|~5.7.0|~5.8.0|^6.0",
         "illuminate/database": "~5.0|~5.7.0|~5.8.0|^6.0",
         "illuminate/hashing": "^5.0",
-        "illuminate/support": "~5.0|~5.7.0|~5.8.0|^6.0",
-        "spatie/dns": "^1.4"
+        "illuminate/support": "~5.0|~5.7.0|~5.8.0|^6.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
