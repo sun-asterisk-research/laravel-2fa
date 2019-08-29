@@ -2,7 +2,9 @@
 
 namespace SunAsterisk\Laravel2FA;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
+use SunAsterisk\Laravel2FA\Console\Commands\ClearVerificationCodeCommand;
 
 class Laravel2FAServiceProvider extends ServiceProvider
 {
@@ -39,5 +41,14 @@ class Laravel2FAServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/laravel-2fa'),
         ], 'views');
+
+        $this->commands([
+            ClearVerificationCodeCommand::class,
+        ]);
+
+        $this->app->booted(function () {
+            $schedule = app(Schedule::class);
+            $schedule->command('2fa:clear')->dailyAt(config('laravel-2fa.clear_verification_code_time'));
+        });
     }
 }
