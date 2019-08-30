@@ -1,30 +1,34 @@
 <?php
 
 namespace SunAsterisk\Laravel2FA\Mails\VerificationCode;
-use Illuminate\Support\Facades\Mail as IlluminateMail;
 
-class VerificationCode
+use Illuminate\Mail\Mailable;
+
+class VerificationCode extends Mailable
 {
+    protected $code;
+
     /**
-     * Verfiy domain ownership via administrator mail
+     * Create a new message instance.
      *
-     * @param string $email
-     * @return view login
+     * @return void
      */
-    public function verify(string $email)
+    public function __construct(string $code)
     {
+        $this->code = $code;
+    }
 
-        $view = config('domain_verifier.mail.view');
-        $subject = config('domain_verifier.mail.subject');
-
-        public function send_mail_verify(string $email)
-		{   $email = 'viniciusdemourarosa@gmail.com';
-		    $code = "123244";
-		    Mail::send($view, $code, function($message) use ($email, $subject) {
-		      $message->to($email);
-		      $message->subject($subject);
-		    });
-		}
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->view('laravel-2fa::emails.verification_code')
+                    ->with([
+                        'code' => $this->code,
+                    ]);
     }
 
 }
