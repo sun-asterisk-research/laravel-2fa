@@ -7,8 +7,9 @@
         "php": ">=7.0",
         "illuminate/config": "~5.0|~5.7.0|~5.8.0|^6.0",
         "illuminate/database": "~5.0|~5.7.0|~5.8.0|^6.0",
-        "illuminate/hashing": "^5.0",
-        "illuminate/support": "~5.0|~5.7.0|~5.8.0|^6.0"
+        "illuminate/support": "~5.0|~5.7.0|~5.8.0|^6.0",
+        "illuminate/http": "~5.0|~5.7.0|~5.8.0|^6.0",
+        "illuminate/routing": "~5.0|~5.7.0|~5.8.0|^6.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.2",
