@@ -37,9 +37,9 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        if ($this->attemptLogin($request)) {
+        if ($this->guard()->validate($this->credentials($request))) {
             $code = VerificationCodeGenerator::generate();
-            $user = $request->user();
+            $user = $this->guard()->getLastAttempted();
             $this->sendVerifyMail($code, $user->email);
             $this->insertVerifyCodeToDatabase($user->id, $code);
             $request->session()->put('2fa:user:id', encrypt($user->id));
