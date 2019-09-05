@@ -4,6 +4,7 @@ namespace SunAsterisk\Laravel2FA\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use SunAsterisk\Laravel2FA\Models\TwoFactorsVerificationCode;
 
 class ClearVerificationCodeCommand extends Command
 {
@@ -28,8 +29,7 @@ class ClearVerificationCodeCommand extends Command
      */
     public function handle()
     {
-        DB::table('two_factors_verification_codes')
-            ->where('revoked', true)
+        TwoFactorsVerificationCode::where('revoked', true)
             ->orWhere('expires_at', '<', now())
             ->delete();
     }
