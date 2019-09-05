@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use SunAsterisk\Laravel2FA\Models\TwoFactorsVerificationCode;
 use SunAsterisk\Laravel2FA\VerificationCodeGenerator;
 
 class LoginController extends Controller
@@ -61,14 +62,11 @@ class LoginController extends Controller
 
     protected function insertVerifyCodeToDatabase($user_id, $code)
     {
-        DB::table('two_factors_verification_codes')
-            ->insert([
+        TwoFactorsVerificationCode::insert([
                 'user_id' => $user_id,
                 'verification_code' => $code,
                 'revoked' => false,
                 'expires_at' => now()->addMinutes(config('laravel-2fa.verification_code_ttl')),
-                'create_at' => now(),
-                'update_at' => now(),
             ]);
     }
 }
